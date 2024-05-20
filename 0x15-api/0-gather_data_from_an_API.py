@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 A Script that, uses https://jsonplaceholder.typicode.com along with an
-employee ID to return information about the employee's todo list progress
+employee ID to return information about the employee's TODO list progress
 """
 
 import json

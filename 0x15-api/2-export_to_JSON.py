@@ -2,10 +2,9 @@
 """
 A Script that, uses https://jsonplaceholder.typicode.com along with an
 employee ID to return information about the employee's TODO list progress
-exporting data in the CSV format.
+and exports data in the JSON format.
 """
 
-import csv
 import json
 import requests
 from sys import argv
@@ -25,15 +24,18 @@ if __name__ == "__main__":
     json_req = employee.json()
     usr = employeeName.json()['username']
 
-    totalTasks = 0
+    totalTasks = []
+    updateUser = {}
 
-    for done_tasks in json_req:
-        if done_tasks['completed']:
-            totalTasks += 1
+    for all_Emp in json_req:
+        totalTasks.append(
+            {
+                "task": all_Emp.get('title'),
+                "completed": all_Emp.get('completed'),
+                "username": usr,
+            })
+    updateUser[idEmp] = totalTasks
 
-    fileCSV = idEmp + '.csv'
-
-    with open(fileCSV, "w", newline='') as csvfile:
-        write = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_ALL)
-        for i in json_req:
-            write.writerow([idEmp, usr, i.get('completed'), i.get('title')])
+    file_Json = idEmp + ".json"
+    with open(file_Json, 'w') as f:
+        json.dump(updateUser, f)
