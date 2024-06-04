@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Number of subscribers for a given subreddit"""
+"""Script that queries the number of subscribers for a given subreddit"""
 
 import requests
 
@@ -14,7 +14,7 @@ def number_of_subscribers(subreddit):
         return 0
 
     # Set a custom User-Agent to identify your application
-    user_agent = {"User-Agent": "My Reddit Subscriber Counter v1.0"}
+    user_agent = {"User-Agent": "Google Chrome Version 125.0.6422.142"}
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
 
     # Use requests.get with allow_redirects=False
