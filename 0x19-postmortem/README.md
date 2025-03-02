@@ -1,43 +1,43 @@
-0x19. Postmortem
-DevOps SysAdmin
+Postmortem Report DR#403
 
--Background context:
-Any software system will eventually fail, and that failure can come stem from a wide range of possible factors: bugs, traffic spikes, security issues, hardware failures, natural disasters, human error… Failing is normal and failing is actually a great opportunity to learn and improve. Any great Software Engineer must learn from his/her mistakes to make sure that they won’t happen again. Failing is fine, but failing twice because of the same issue is not.
+Postmortem: E-commerce Platform Outage - 30 January 2025 12:30 CAT to 30 January 2025 15:20 CAT
 
-A postmortem is a tool widely used in the tech industry. After any outage, the team(s) in charge of the system will write a summary that has 2 main goals:
 
-To provide the rest of the company’s employees easy access to information detailing the cause of the outage. Often outages can have a huge impact on a company, so managers and executives have to understand what happened and how it will impact their work.
-And to ensure that the root cause(s) of the outage has been discovered and that measures are taken to make sure it will be fixed.
+Issue Summary:
+Our e-commerce platform experienced a service outage lasting for 2 hours and 20 minutes, impacting 100% of users during peak buying hours on the 30th of January 2025. Users encountered error messages while trying to add items to their carts and proceed to checkout.
+The root cause of the outage was identified as a surge in traffic due to an unannounced flash sale promotion.
 
--Tasks:
-This project had 1 mandatory task.
-0. My first postmortem
-Using one of the web stack debugging project issue or an outage you have personally face, write a postmortem. Most of you will never have faced an outage, so just get creative and invent your own :)
+Timeline:
+30 January 2025 12:30 CAT: Monitoring alerts indicated a significant increase in website traffic.
 
-Requirements:
+30 January 2025 12:50 CAT: Engineers observed a spike in API calls to the shopping cart functionality.
 
-Issue Summary (that is often what executives will read) must contain:
-duration of the outage with start and end times (including timezone)
-what was the impact (what service was down/slow? What were user experiencing? How many % of the users were affected?)
-what was the root cause
-Timeline (format bullet point, format: time - keep it short, 1 or 2 sentences) must contain:
+30 January 2025 12:55 CAT: The shopping cart service became unresponsive, causing errors for users.
 
-when was the issue detected
-how was the issue detected (monitoring alert, an engineer noticed something, a customer complained…)
-actions taken (what parts of the system were investigated, what were the assumption on the root cause of the issue)
-misleading investigation/debugging paths that were taken
-which team/individuals was the incident escalated to
-how the incident was resolved
-Root cause and resolution must contain:
+30 January 2025 12:55 - 14:05 CAT: The engineering team initially investigated potential database connection issues and application errors. This path proved to be a dead end as resources were functioning within normal parameters.
 
-explain in detail what was causing the issue
-explain in detail how the issue was fixed
-Corrective and preventative measures must contain:
+30 January 2025 13:55 CAT: The incident was escalated to the infrastructure team after identifying the issue was likely related to server capacity limitations.
 
-what are the things that can be improved/fixed (broadly speaking)
-a list of tasks to address the issue (be very specific, like a TODO, example: patch Nginx server, add monitoring on server memory…)
-Be brief and straight to the point, between 400 to 600 words
+30 January 2025 14:45 CAT: The infrastructure team initiated horizontal scaling of the shopping cart service instances to handle the increased load.
 
-While postmortem format can vary, stick to this one so that you can get properly reviewed by your peers.
+30 January 2025 15:20 CAT: The shopping cart service recovered, and normal functionality resumed.
 
-Please, remember that these blogs must be written in English to further your technical ability in a variety of settings.
+30 January 2025 16:00 CAT: The post-incident review process commenced.
+
+
+Root Cause and Resolution:
+The outage was caused by an unexpected surge in traffic exceeding the capacity of our shopping cart service. This surge was attributed to a flash sale promotion that was not communicated to the engineering team for proper load balancing adjustments.
+To resolve the issue, the infrastructure team horizontally scaled the shopping cart service instances, allowing for more efficient handling of the increased user load. This restored normal functionality to the platform.
+
+Corrective and Preventative Measures:
+Improved communication: Implement a mandatory notification process for marketing and sales promotions to ensure the engineering team can prepare for potential traffic spikes.
+
+Capacity planning: Conduct regular load testing that simulates real-world traffic scenarios, including flash sales, to identify and address capacity limitations proactively.
+
+Monitoring enhancements: Fine-tune monitoring alerts to trigger based on specific metrics related to the shopping cart service, such as API call volume and response times. This will allow for faster identification of performance bottlenecks.
+
+Automatic scaling: Investigate and implement automated horizontal scaling solutions for critical services to handle unexpected traffic surges without requiring manual intervention.
+
+
+This postmortem report serves as a learning experience to prevent similar outages in the future. By implementing the corrective and preventative measures outlined above, we can ensure a more resilient and scalable ecommerce platform that can handle peak traffic demands.
+
